@@ -1,21 +1,27 @@
 const mongoose = require("mongoose");
 
-const productSchema = new mongoose.Schema({
-  sku : {type:String,required:true,unique:true},
-  productname : {type:String,required:true},
-  description : {type:String,required:true},
-  category : {type:Array},
-  keyword : {type:Array},
-  length: {type:Number},
-  height: {type:Number},
-  width: {type:Number},
-  size : {type:String},
-  color : {type:String,required:true},
-  price : {type:Number,required:true},
-  image : {type:String,required:true},
-  status: {type:String,default:"active",required:true},
-  quantity: {type:Number,required:true}
-},{timestamps : true}
+const productSchema = new mongoose.Schema(
+  {
+    name : {type:String, required:true},
+    brand: String,
+    slug: {type:String, required:true, unique:true},
+    sku : {type:String, required:true, unique:true},
+    description : {type:String, required:true},
+    category : {type:Array},
+    keyword : {type:Array},
+    length: {type: mongoose.Decimal128},
+    height: {type: mongoose.Decimal128},
+    width: {type: mongoose.Decimal128},
+    weight: {type: mongoose.Decimal128},
+    weightUnit: {type: String},
+    size : {type: String},
+    color : {type:String, required:true},
+    image : [{url: String, isThumbnail: Boolean, order: Number}],
+    isActive: Boolean,
+    quantity: {type:Number, required:true},
+    price: mongoose.Decimal128
+  },
+  {timestamps : true}
 );
 
 module.exports = mongoose.model("Product", productSchema);
