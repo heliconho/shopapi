@@ -19,6 +19,11 @@ const productSchema = new mongoose.Schema(
     image       : [{url: String, isThumbnail: Boolean, order: Number}],
     isActive    : Boolean,
     quantity    : {type:Number, required:true},
+    images      : {
+      thumbnail : {url: {type: String}},
+      compressed: {url: {type: String}},
+      order     : {type: Number}
+    }
   },
   {
     timestamps  : true
